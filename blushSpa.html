@@ -21,6 +21,16 @@
 <script type='application/ld+json'>{"@context":"http:\/\/schema.org","@type":"WebSite","url":"http:\/\/sufiidayspafranchise.com\/","name":"Sufii Day Spa","potentialAction":{"@type":"SearchAction","target":"http:\/\/sufiidayspafranchise.com\/?s={search_term_string}","query-input":"required name=search_term_string"}}</script>
 <!-- / Yoast SEO plugin. -->
 
+<!--360 meta-->
+ <meta name="description" content="360&deg; Image Gallery - A-Frame">
+    <script src="https://rawgit.com/aframevr/aframe/917c06889ee1f3f79b7b1bbd9eab9815f9512503/dist/aframe.min.js"></script>
+    <script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-layout-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-template-component@3.0.1"></script>
+    <script src="components/set-image.js"></script>
+    <script src="components/update-raycaster.js"></script>
+
 <link rel='dns-prefetch' href='//s.w.org' />
 <link rel="alternate" type="application/rss+xml" title="Sufii Day Spa &raquo; Feed" href="http://sufiidayspafranchise.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Sufii Day Spa &raquo; Comments Feed" href="http://sufiidayspafranchise.com/comments/feed/" />
@@ -160,22 +170,66 @@ jQuery(document).ready( function($){
 <option  id="menu-item-14" value="http://sufiidayspafranchise.com/request-more-information/">Request Information</option>
 </select>
 
-<div id="inner">
+  <!-- 360Photo end #home-top -->
+      <!-- <div id="inner">
             <h3>VR Media</h3>
           <article class="4u 12u(mobile) special">
             <a-scene class="VRImg" embedded>
             <a-sky src="http://i.imgur.com/vuHF1d3.jpg" ></a-sky>
             </a-scene>
           </article>
+      </div> -->
 
+<a-scene class="VRImg" embedded >
+      <a-assets>
+        <img id="city" crossorigin="anonymous" src="http://i.imgur.com/ZDW233f.jpg">
+        <img id="city-thumb" crossorigin="anonymous" src="http://i.imgur.com/ZDW233f.jpg">
+        <img id="cubes-thumb" crossorigin="anonymous" src="http://i.imgur.com/6clepDF.jpg">
+        <img id="sechelt-thumb" crossorigin="anonymous" src="http://i.imgur.com/1LJjchW.jpg">
+        <img id="spaRoom-thumb" crossorigin="anonymous" src="http://i.imgur.com/LMIiPSp.jpg">
+        <img id="spaHall-thumb" crossorigin="anonymous" src="http://i.imgur.com/6EubTp5.jpg">
+        <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
 
+        <!-- Image link template to be reused. -->
+        <script id="link" type="text/nunjucks">
+          <a-plane class="link" height="1" width="1"
+            material="shader: flat; src: {{ thumb }}"
+            event-set__1="_event: mousedown; scale: 1 1 1"
+            event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+            event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+            event-set__4="_event: mouseleave; scale: 1 1 1"
+            set-image="on: click; target: #image-360; src: {{ src }}"
+            sound="on: click; src: #click-sound"
+            update-raycaster="#cursor"></a-plane>
+        </script>
+      </a-assets>
 
+      <!-- 360-degree image. -->
+      <a-sky id="image-360" radius="10" rotation="-4 -80 12" src="#city"></a-sky>
+
+      <!-- Image links. -->
+      <a-entity id="links" layout="type: line; margin: 1.5" position="-5 -1 -3 ">
+        <a-entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></a-entity>
+        <a-entity template="src: #link" data-src="#city" data-thumb="#city-thumb"></a-entity>
+        <a-entity template="src: #link" data-src="#sechelt" data-thumb="#sechelt-thumb"></a-entity>
+
+        <a-entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></a-entity>
+        <a-entity template="src: #link" data-src="#spaRoom" data-thumb="#spaRoom-thumb"></a-entity>
+        <a-entity template="src: #link" data-src="#spaHall" data-thumb="#spaHall-thumb"></a-entity>
+      </a-entity>
+
+      <!-- Camera + cursor. -->
+      <a-entity camera look-controls>
+        <a-cursor id="cursor"
+          animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+          animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+          event-set__1="_event: mouseenter; color: springgreen"
+          event-set__2="_event: mouseleave; color: black"
+          raycaster="objects: .link"></a-cursor>
+      </a-entity>
+    </a-scene>
 
   <!-- 360Photo end #home-top -->
-
-
-
-</div>
 
 
 <div class="creds">
