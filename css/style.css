@@ -746,8 +746,10 @@ img{
 
 /***** VR Content ********************/
 .VRImg {
-  height: 800px;
-  width: 1000px;
+  height: 700%;
+  width: 120%;
+  margin-top: 50px;
+
 }
 
 
